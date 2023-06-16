@@ -23,6 +23,25 @@ function App() {
 
 
 
+		
+		if( txtPokemon == "" ){
+			buscaTodosPokemons();
+			return;
+		}
+
+		axios.get("https://pokeapi.co/api/v2/pokemon/"+txtPokemon)
+		.then( response => { // Será executado quando a requisição terminar
+			console.log("Requisição bem sucedida!");
+			console.log(response.data)
+			alteraPokemons( [response.data] );
+		} )  
+		.catch( response => { // É executado quando dá erro na requisição
+			console.log("Deu ruim na requisição");
+			console.log(response);
+			alert("Esse pokemon não exista mano, presta atenção");
+			buscaTodosPokemons();
+		} ) 
+
 	}
 
 	function buscaTodosPokemons(){
